@@ -29,6 +29,10 @@ export default function ChatPage() {
   const [isSending, setIsSending] = useState(false);
   const [socket, setSocket] = useState(null);
   const [insightsCache, setInsightsCache] = useState({});
+  const [isRosterOpen, setIsRosterOpen] = useState(false);
+
+  const openRoster = useCallback(() => setIsRosterOpen(true), []);
+  const closeRoster = useCallback(() => setIsRosterOpen(false), []);
 
   const handleUnauthorized = useCallback(() => {
     localStorage.removeItem("token");
@@ -248,8 +252,9 @@ export default function ChatPage() {
         setInsightError("");
       }
       fetchConversation(user.id);
+      closeRoster();
     },
-    [fetchConversation, insightsCache]
+    [closeRoster, fetchConversation, insightsCache]
   );
 
   const handleSendMessage = useCallback(async () => {
@@ -295,8 +300,8 @@ export default function ChatPage() {
       <div className="pointer-events-none absolute -top-24 left-6 h-56 w-56 rounded-full bg-[radial-gradient(circle_at_top,var(--brand-accent),rgba(255,255,255,0))] opacity-60" />
       <div className="pointer-events-none absolute -bottom-24 right-0 h-64 w-64 rounded-full bg-[radial-gradient(circle_at_bottom,var(--brand-secondary),rgba(255,255,255,0))] opacity-50" />
 
-      <div className="relative mx-auto flex h-[min(78vh,760px)] w-full max-w-6xl flex-col overflow-hidden rounded-[32px] border border-white/60 bg-white/85 shadow-[0_50px_140px_-60px_rgba(17,28,68,0.6)] backdrop-blur-xl lg:flex-row">
-        <div className="w-full shrink-0 border-b border-white/60 bg-[rgba(242,246,255,0.9)] lg:w-72 lg:border-b-0 lg:border-r lg:bg-[rgba(241,245,255,0.92)]">
+      <div className="relative mx-auto flex min-h-[70vh] w-full max-w-6xl flex-col overflow-hidden rounded-[28px] border border-white/60 bg-white/85 shadow-[0_50px_140px_-60px_rgba(17,28,68,0.6)] backdrop-blur-xl sm:rounded-[32px] lg:h-[min(78vh,760px)] lg:flex-row">
+        <div className="hidden h-full w-full shrink-0 border-b border-white/60 bg-[rgba(242,246,255,0.9)] lg:flex lg:w-72 lg:flex-col lg:border-b-0 lg:border-r lg:bg-[rgba(241,245,255,0.92)]">
           <UserList
             users={users}
             activeUserId={activeUser?.id}
@@ -316,6 +321,7 @@ export default function ChatPage() {
             insight={insight}
             insightError={insightError}
             isInsightLoading={isLoadingInsight}
+            onOpenRoster={openRoster}
           />
 
           {activeUser ? (
@@ -340,6 +346,26 @@ export default function ChatPage() {
           )}
         </div>
       </div>
+
+      {isRosterOpen ? (
+        <div className="fixed inset-0 z-50 flex items-start justify-end lg:hidden">
+          <div
+            className="absolute inset-0 bg-[rgba(12,18,36,0.45)] backdrop-blur-sm"
+            onClick={closeRoster}
+          />
+          <div className="relative h-full w-full max-w-sm bg-white/98 shadow-[0_50px_140px_-60px_rgba(17,28,68,0.65)]">
+            <UserList
+              users={users}
+              activeUserId={activeUser?.id}
+              onSelectUser={handleSelectUser}
+              isLoading={isLoadingUsers}
+              errorMessage={usersError}
+              onClose={closeRoster}
+              className="bg-transparent"
+            />
+          </div>
+        </div>
+      ) : null}
     </section>
   );
 }

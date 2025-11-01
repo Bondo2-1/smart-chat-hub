@@ -6,16 +6,38 @@ export default function UserList({
   onSelectUser,
   isLoading,
   errorMessage,
+  onClose,
+  className = "",
 }) {
   return (
-    <div className="flex h-full flex-col">
-      <div className="border-b border-white/60 px-5 py-5">
-        <h2 className="text-lg font-semibold text-[var(--brand-primary)]">
+    <div className={`flex h-full flex-col ${className}`}>
+      <div className="flex items-center justify-between gap-3 border-b border-white/60 px-5 py-5">
+        <div>
+          <h2 className="text-lg font-semibold text-[var(--brand-primary)]">
           Direct messages
         </h2>
-        <p className="mt-1 text-xs text-[rgba(17,28,68,0.6)]">
-          Choose a teammate to open a conversation.
-        </p>
+          <p className="mt-1 text-xs text-[rgba(17,28,68,0.6)]">
+            Choose a teammate to open a conversation.
+          </p>
+        </div>
+        {onClose ? (
+          <button
+            type="button"
+            onClick={onClose}
+            className="inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-[rgba(17,28,68,0.15)] text-[var(--brand-primary)] transition hover:border-[var(--brand-primary)] hover:bg-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--brand-secondary)]"
+            aria-label="Close team list"
+          >
+            <svg
+              viewBox="0 0 20 20"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="1.6"
+              className="h-4 w-4"
+            >
+              <path d="M4 4l12 12M16 4 4 16" strokeLinecap="round" />
+            </svg>
+          </button>
+        ) : null}
       </div>
 
       <div className="flex-1 space-y-2 overflow-y-auto px-3 py-5">

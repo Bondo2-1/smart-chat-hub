@@ -118,28 +118,28 @@ export default function AuthPage() {
   };
 
   return (
-    <div className="relative isolate overflow-hidden rounded-[36px] bg-white/80 px-6 py-16 shadow-[0_40px_120px_-50px_rgba(15,23,42,0.55)] backdrop-blur lg:px-12 xl:px-16">
+    <div className="relative isolate mx-auto w-full max-w-5xl overflow-hidden rounded-[26px] bg-white/85 px-5 py-12 shadow-[0_40px_120px_-55px_rgba(15,23,42,0.58)] backdrop-blur-sm sm:rounded-[32px] sm:px-8 sm:py-14 lg:rounded-[36px] lg:px-12 lg:py-16">
       <div className="pointer-events-none absolute -top-32 -left-24 h-64 w-64 rounded-full bg-[radial-gradient(circle_at_top,var(--brand-accent),rgba(255,255,255,0))] opacity-60" />
       <div className="pointer-events-none absolute -bottom-24 -right-10 h-64 w-64 rounded-full bg-[radial-gradient(circle_at_bottom,var(--brand-secondary),rgba(255,255,255,0))] opacity-70" />
 
-      <div className="grid items-center gap-14 lg:grid-cols-[1.05fr_0.95fr]">
-        <div className="relative z-10 space-y-8">
+      <div className="grid items-center gap-10 sm:gap-12 lg:grid-cols-[1.05fr_0.95fr] lg:gap-14">
+        <div className="relative z-10 space-y-8 text-center lg:text-left">
           <span className="inline-flex items-center gap-2 rounded-full bg-[rgba(17,28,68,0.08)] px-4 py-2 text-xs font-semibold uppercase tracking-[0.22em] text-[rgba(17,28,68,0.7)]">
             Powered by Smart Chat Hub
           </span>
 
           <div className="space-y-6">
-            <h1 className="text-4xl font-bold leading-tight text-[var(--brand-primary)] sm:text-5xl">
+            <h1 className="text-3xl font-bold leading-tight text-[var(--brand-primary)] sm:text-4xl lg:text-5xl">
               Connected conversations. Seamless customer journeys.
             </h1>
-            <p className="max-w-xl text-base leading-7 text-[rgba(17,28,68,0.72)] sm:text-lg">
+            <p className="mx-auto max-w-xl text-base leading-7 text-[rgba(17,28,68,0.72)] sm:text-lg lg:mx-0">
               Smart Chat Hub brings every channel, teammate, and customer into a
               single modern workspace inspired by the fluid experience of
               V.CONNECT. Build stronger relationships without the busywork.
             </p>
           </div>
 
-          <div className="grid gap-5 sm:grid-cols-2">
+          <div className="grid gap-4 sm:gap-5 sm:grid-cols-2">
             {[
               "Unified inbox with live presence indicators",
               "AI-powered insights tailored to your conversations",
@@ -148,7 +148,7 @@ export default function AuthPage() {
             ].map((item) => (
               <div
                 key={item}
-                className="flex items-start gap-3 rounded-2xl border border-white/60 bg-white/60 p-4 shadow-[0_22px_48px_-36px_rgba(17,28,68,0.4)]"
+                className="flex items-start gap-3 rounded-2xl border border-white/60 bg-white/70 p-4 shadow-[0_22px_48px_-36px_rgba(17,28,68,0.4)]"
               >
                 <span className="mt-1 h-2.5 w-2.5 rounded-full bg-[var(--brand-accent)]" />
                 <p className="text-sm font-medium leading-6 text-[rgba(17,28,68,0.8)]">
@@ -159,9 +159,9 @@ export default function AuthPage() {
           </div>
         </div>
 
-        <div className="relative z-10 rounded-[28px] border border-white/60 bg-white/90 p-8 shadow-[0_45px_100px_-60px_rgba(17,28,68,0.5)] sm:p-10">
-          <div className="mb-8 flex items-center justify-between">
-            <div>
+        <div className="relative z-10 rounded-[24px] border border-white/60 bg-white/95 p-6 shadow-[0_45px_100px_-60px_rgba(17,28,68,0.5)] sm:rounded-[28px] sm:p-8 lg:rounded-[32px] lg:p-10">
+          <div className="mb-8 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+            <div className="text-center sm:text-left">
               <h2 className="text-2xl font-semibold text-[var(--brand-primary)]">
                 {copy.title}
               </h2>
@@ -171,7 +171,7 @@ export default function AuthPage() {
             </div>
           </div>
 
-          <div className="mb-6 flex rounded-full bg-[rgba(17,28,68,0.06)] p-1">
+          <div className="mb-6 flex flex-col gap-2 sm:flex-row sm:gap-0 rounded-full bg-[rgba(17,28,68,0.06)] p-1">
             {Object.values(MODES).map((modeOption) => {
               const isActive = modeOption.key === mode;
               return (
